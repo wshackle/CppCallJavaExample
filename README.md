@@ -25,3 +25,7 @@ Main.test(100) called.
 Tested on linux(Ubuntu 14.4)  with JAVA_HOME=/usr/local/jdk1.8.0_25, the Makefile will likely need to be edited 
 to match the directory layout for your version of the jdk. 
 
+On x64 systems use:  
+
+make JRE_TYPE=amd64/server  
+

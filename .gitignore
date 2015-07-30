@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+/CppWrapJavaExampleDynamicLibrary/build/
+/CppCallJavaApplication/build/
+/CppCallJavaApplication/dist/
+/CppWrapJavaExampleDynamicLibrary/dist/

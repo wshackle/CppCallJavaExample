@@ -26,7 +26,18 @@
 *.exe
 *.out
 *.app
+
+#emacs backup file
+*~
+
+#crash log
+hs_err*.log
+
+
 /CppWrapJavaExampleDynamicLibrary/build/
 /CppCallJavaApplication/build/
 /CppCallJavaApplication/dist/
+/CppCallJavaApplication/nbproject/private/
 /CppWrapJavaExampleDynamicLibrary/dist/
+/CppWrapJavaExampleDynamicLibrary/nbproject/private
+

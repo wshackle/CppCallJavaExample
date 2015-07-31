@@ -48,7 +48,7 @@
 MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
-JDK_DIR?=/usr/local/jdk1.8.0_40/
+JDK_DIR?=/usr/lib/jvm/java-7-openjdk-amd64/
 JRE_LIB_DIR?=$(JDK_DIR)/jre/lib/amd64/server/
 JAVAC?=$(JDK_DIR)/bin/javac
 

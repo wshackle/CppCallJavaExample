@@ -67,7 +67,7 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cppcalljavaapplication: ${OBJECTFILES
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I../CppWrapJavaExampleDynamicLibrary -I${JDI_DIR}/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 -I../CppWrapJavaExampleDynamicLibrary -I${JDK_DIR}/include -I${JDK_DIR}/include/linux -I/usr/lib/jvm/java-7-openjdk-amd64/include/linux -I/usr/lib/jvm/java-7-openjdk-amd64/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

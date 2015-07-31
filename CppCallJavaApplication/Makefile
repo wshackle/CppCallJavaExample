@@ -48,7 +48,7 @@
 MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
-JDK_DIR?=/usr/local/jdk1.8.0_40/
+JDK_DIR?=/usr/lib/jvm/java-7-openjdk-amd64/
 JRE_LIB_DIR?=$(JDK_DIR)/jre/lib/amd64/server/
 JAVAC?=$(JDK_DIR)/bin/javac
 
@@ -70,7 +70,7 @@ clean: .clean-post
 # Add your pre 'clean' code here...
 
 .clean-post: .clean-impl
-	-rm *.class
+	-rm *.class || true
 
 
 # clobber
@@ -129,3 +129,9 @@ include nbproject/Makefile-impl.mk
 
 # include project make variables
 include nbproject/Makefile-variables.mk
+
+testRun: build
+	-pwd
+	${CND_ARTIFACT_PATH_${CONF}}
+	
+.PHONY: testRun

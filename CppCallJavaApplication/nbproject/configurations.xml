@@ -38,7 +38,10 @@
         <ccTool>
           <incDir>
             <pElem>../CppWrapJavaExampleDynamicLibrary</pElem>
-            <pElem>${JDI_DIR}/include</pElem>
+            <pElem>${JDK_DIR}/include</pElem>
+            <pElem>${JDK_DIR}/include/linux</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include/linux</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
@@ -92,7 +95,10 @@
           <developmentMode>5</developmentMode>
           <incDir>
             <pElem>../CppWrapJavaExampleDynamicLibrary</pElem>
-            <pElem>${JDI_DIR}/include</pElem>
+            <pElem>${JDK_DIR}/include</pElem>
+            <pElem>${JDK_DIR}/include/linux</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include/linux</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include</pElem>
           </incDir>
         </ccTool>
         <fortranCompilerTool>

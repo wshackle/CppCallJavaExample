@@ -13,22 +13,6 @@
 using namespace std;
 using namespace javamain;
 
-static JNIEnv *env = NULL;
-static jclass mainClass = NULL;
-
-namespace javamain {
-
-    void closeJVM() {
-        JavaVM * jvmBuf[1];
-        jsize nVMs;
-        env = NULL;
-        mainClass = NULL;
-        jint v = JNI_GetCreatedJavaVMs(jvmBuf, 1, &nVMs);
-        if (nVMs > 0) {
-            jvmBuf[0]->DestroyJavaVM();
-        }
-    }
-}
 
 static JNIEnv *getNewEnv() {
     JavaVM *jvm; /* denotes a Java VM */
@@ -56,13 +40,9 @@ static JNIEnv *getNewEnv() {
     return env;
 }
 
-static inline JNIEnv *getEnv() {
-    if (env != NULL) {
-        return env;
-    }
-    env = getNewEnv();
-    return env;
-}
+
+static inline jclass getMainClass();
+static inline JNIEnv *getEnv();
 
 static jclass getNewMainClass() {
     jclass clss = getEnv()->FindClass("Main");
@@ -72,6 +52,80 @@ static jclass getNewMainClass() {
     return clss;
 }
 
+
+
+namespace javamain {
+
+    void Main::staticTest(jint i) {
+        JNIEnv *env =getEnv();
+        jclass cls = getMainClass();
+        if (cls != NULL) {
+            jmethodID mid = env->GetStaticMethodID(cls, "staticTest", "(I)V");
+            if (NULL == mid) {
+                std::cerr << "Class Main has no method named staticTest" << std::endl;
+            } else {
+                env->CallStaticVoidMethod(cls, mid, i);
+            }
+        }
+    }
+    
+    Main::Main(jint i) {
+        JNIEnv *env =getEnv();
+        jclass cls = getMainClass();
+        if (cls != NULL) {
+            jmethodID mid = env->GetMethodID(cls, "<init>", "(I)V");
+            if (NULL == mid) {
+                std::cerr << "Class Main has no method constructor with int parameter" << std::endl;
+            } else {
+                jthis = env->NewObject(cls, mid, i);
+                jobjectRefType ref = env->GetObjectRefType(jthis);
+//                std::cout << "new ref is " << ref << std::endl;
+                if(ref != JNIGlobalRefType) {
+                    jthis = env->NewGlobalRef(jthis);
+                }
+            }
+        }
+    }
+    jint Main::getI() {
+        jclass cls = getMainClass();
+        JNIEnv *env =getEnv();
+        if (cls != NULL) {
+            jmethodID mid = env->GetMethodID(cls, "getI", "()I");
+            if (NULL == mid) {
+                std::cerr << "Class Main has no method named getI" << std::endl;
+                return (jint) -1;
+            } else {
+                return env->CallIntMethod(jthis, mid);
+            }
+        }
+    }
+    
+    Main::~Main() {
+        if(NULL != jthis) {
+            getEnv()->DeleteGlobalRef(jthis);
+            jthis=NULL;
+        }
+    }
+}
+
+static JNIEnv *env = NULL;
+static jclass mainClass = NULL;
+
+namespace javamain {
+    void closeJVM() {
+        JavaVM * jvmBuf[1];
+        jsize nVMs;
+        env = NULL;
+        mainClass = NULL;
+        jint v = JNI_GetCreatedJavaVMs(jvmBuf, 1, &nVMs);
+        if (nVMs > 0) {
+            jvmBuf[0]->DestroyJavaVM();
+        }
+    }
+}
+
+
+
 static inline jclass getMainClass() {
     if (mainClass != NULL) {
         return mainClass;
@@ -79,18 +133,10 @@ static inline jclass getMainClass() {
     mainClass = getNewMainClass();
 }
 
-namespace javamain {
-
-    void test(int i) {
-        jclass cls = getMainClass();
-        if (cls != NULL) {
-            jmethodID mid = env->GetStaticMethodID(cls, "test", "(I)V");
-            if (NULL == mid) {
-                std::cerr << "Class Main has no method named test" << std::endl;
-            } else {
-                env->CallStaticVoidMethod(cls, mid, i);
-            }
-        }
+static inline JNIEnv *getEnv() {
+    if (env != NULL) {
+        return env;
     }
+    env = getNewEnv();
+    return env;
 }
-

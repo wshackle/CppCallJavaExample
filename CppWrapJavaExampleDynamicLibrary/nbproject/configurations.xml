@@ -41,6 +41,8 @@
             <pElem>.</pElem>
             <pElem>${JDK_DIR}/include/</pElem>
             <pElem>${JDK_DIR}/include/linux/</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include/linux</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
@@ -73,6 +75,8 @@
             <pElem>.</pElem>
             <pElem>${JDK_DIR}/include/</pElem>
             <pElem>${JDK_DIR}/include/linux/</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include</pElem>
+            <pElem>/usr/lib/jvm/java-7-openjdk-amd64/include/linux</pElem>
           </incDir>
         </ccTool>
         <fortranCompilerTool>

@@ -8,9 +8,21 @@
 #ifndef MAIN_H
 #define	MAIN_H
 
-namespace javamain{
+#include <jni.h>
 
-    extern void test(int i);
+namespace javamain {
+
+    class Main {
+    private:
+        jobject jthis;
+
+    public:
+        static void staticTest(jint i);
+        virtual jint getI();
+        Main(jint i);
+        virtual ~Main();
+    };
+
     extern void closeJVM();
 }
 
